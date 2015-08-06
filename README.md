@@ -1,7 +1,7 @@
 
-Application is build as micro service which consumes REST-HTTP request and process it to store in MONGODB
+The application is build as micro service which consumes REST-HTTP request and process it to store in MONGODB
 
-Main tools used to build application spray and reactive Mongo . This build using scala language .
+Main tools used to build the application are spray and reactive Mongo . This is build using scala language .
 
 Code base has 2 types of application using spray .
 
@@ -16,3 +16,6 @@ http://localhost:8080/person
 Both application uses reactive mongo as framework to store json in mongoDB
 
 MongoDB is default configured to run only locally with "plugin" DB
+
+
+Test is done using spray-testkit which test routing request and response using starting server  . 
