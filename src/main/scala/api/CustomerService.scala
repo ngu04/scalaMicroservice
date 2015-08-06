@@ -6,7 +6,7 @@ import db.MongoPersistence
 import model.Customer
 import spray.http.MediaTypes._
 
-class CustomerService(implicit val system: ActorSystem,actorRefFactory: ActorRefFactory) extends RoutedEndpoints with ServiceHandler{
+class CustomerService(implicit val system: ActorSystem,actorRefFactory: ActorRefFactory) extends RoutedEndpoints{
 
   implicit val marshaller = jsonMarshaller
   implicit val unmarshaller = jsonUnmarshaller[Customer]
@@ -20,7 +20,7 @@ class CustomerService(implicit val system: ActorSystem,actorRefFactory: ActorRef
             // Push the handling to another context so that we don't block
             MongoPersistence.getListCollection("customer")
           }
-        }
+        } ~
         // GET /customer/{firstName}
         path(Rest){ firstName  =>
           respondWithMediaType(`application/json`){

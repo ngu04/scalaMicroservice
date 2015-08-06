@@ -1,6 +1,6 @@
 package db
 
-import model.{Customer}
+import model.{Person, Customer}
 import reactivemongo.api.collections.bson.BSONCollection
 import reactivemongo.api.commands.WriteResult
 import reactivemongo.bson.{BSONValue, BSONDocument}
@@ -133,7 +133,36 @@ object MongoPersistence{
      }
    }
 
+  def insertInPersonCollection[T](collectionName : String ,collectionData : Person)(implicit marshaller: Marshaller[Person]): Route = ctx => {
 
+    val collection :BSONCollection = dataBase(collectionName)
+
+    val f : Future[WriteResult] = collection.insert(collectionData)
+
+    f onComplete{
+      case Success(writeResult) => writeResult.hasErrors match {
+        case true => {
+          println("**********Inside Success Future has error true ************")
+          ctx.complete("{\"status\":\""+writeResult.getMessage()+"\"}")(ToResponseMarshaller.fromMarshaller(InternalServerError))
+        }
+
+        case false => {
+          println("**********Inside Success Future has error false ************")
+          ctx.complete("{\"status\":\"Created\"}")(ToResponseMarshaller.fromMarshaller(Created))
+
+        }
+
+      }
+
+      case Failure(e) =>{
+        println("*************+Failure+************************")
+
+        ctx.complete(e.getMessage)(ToResponseMarshaller.fromMarshaller(InternalServerError))
+
+        println(e)
+      }
+    }
+  }
 
 
 }

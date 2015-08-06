@@ -6,7 +6,7 @@ import spray.json.{DefaultJsonProtocol, JsValue, RootJsonFormat,_}
 
 case class Customer (val firstName : String, val lastName: String)
 
-object Customer extends DefaultJsonProtocol{
+object Customer {
 
   implicit object CustomerWriter extends BSONDocumentWriter[Customer] {
     def write(customer: Customer): BSONDocument =  BSONDocument(
@@ -18,24 +18,11 @@ object Customer extends DefaultJsonProtocol{
     def read(doc: BSONDocument): Customer = {
       val firstName = doc.getAs[String]("firstName").get
       val lastName = doc.getAs[String]("lastName").get
-      //val age = doc.getAs[Int]("age").get
 
       Customer(firstName, lastName)
     }
   }
 
-
-
-//  implicit val format = new RootJsonFormat[Customer] {
-//
-//    override def write(customer: Customer): JsValue = {
-//         customer.toJson
-//      }
-//
-//    override def read(json: JsValue): Customer = {
-//      json.convertTo[Customer]
-//    }
-//  }
 
 }
 

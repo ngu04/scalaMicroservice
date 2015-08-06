@@ -14,7 +14,7 @@ object SimpleSprayService extends App with SimpleRoutingApp {
   implicit val systemActor = ActorSystem()
 
 
-  startServer(interface = "localhost", port = 8080) {
+  lazy val simpleRoute = {
 
     get {
       path("person") {
@@ -33,6 +33,10 @@ object SimpleSprayService extends App with SimpleRoutingApp {
         }
       }
 
+  }
+
+  startServer(interface = "localhost", port = 8080) {
+    simpleRoute
   }
 
 }

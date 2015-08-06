@@ -30,18 +30,21 @@ libraryDependencies ++= {
     "ch.qos.logback"      % "logback-classic"                       % "1.1.3",
     "io.spray"            %% "spray-can"                            % sprayVersion,
     "io.spray"            %% "spray-routing"                        % sprayVersion,
+    "io.spray"            %% "spray-client"                         % sprayVersion,
     "net.liftweb"         %% "lift-json"                            % liftVersion,
-
+    "org.scalatest"       %% "scalatest"                            % "2.2.2"       % "test",
     "com.typesafe.akka"   %% "akka-testkit"                         % akkaVersion   % "test",
     "io.spray"            %% "spray-testkit"                        % sprayVersion  % "test",
     "org.scalaz.stream"   %% "scalaz-stream"                        % "0.7a"        % "test",
     "org.specs2"          %% "specs2-core"                          % specsVersion  % "test",
     "org.specs2"          %% "specs2-mock"                          % specsVersion  % "test",
     "org.reactivemongo"   %% "reactivemongo"                        % "0.11.4",
-//    "com.typesafe.akka" %% "akka-stream-experimental" % akkaStreamV,
+  //  "com.typesafe.akka" %% "akka-stream-experimental" % akkaStreamV,
 //    "com.typesafe.akka" %% "akka-http-core-experimental" % akkaStreamV,
 //    "com.typesafe.akka" %% "akka-http-scala-experimental" % akkaStreamV,
-    "com.typesafe.akka" %% "akka-http-spray-json-experimental" % akkaStreamV
+    "com.typesafe.akka" %% "akka-http-spray-json-experimental" % akkaStreamV,
+    "org.json4s" %% "json4s-native" % "3.2.11"
+
 
   )
 }
