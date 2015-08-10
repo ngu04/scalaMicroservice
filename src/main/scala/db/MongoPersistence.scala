@@ -57,6 +57,34 @@ object MongoPersistence{
   // Gets a reference to the database "plugin"
   val dataBase = connection("plugin")
 
+  def getListWithoutRoute(collectionName : String): Future[List[BSONDocument]] = {
+    val collection :BSONCollection = dataBase(collectionName)
+
+    val query = BSONDocument()
+    val f = collection.find(query).cursor().collect[List]()
+
+    f
+  }
+
+  def getCustomerListWithoutRoute(collectionName : String,firstName : String ): Future[List[Customer]] = {
+    val collection :BSONCollection = dataBase(collectionName)
+
+    val query = BSONDocument("firstName" ->  firstName)
+
+    val f = collection.find(query).cursor[Customer]().collect[List]()
+
+    f
+  }
+
+  def insertInCollectionWithoutRoute(collectionName : String ,collectionData : Customer): Future[WriteResult] = {
+
+    val collection :BSONCollection = dataBase(collectionName)
+
+    val f : Future[WriteResult] = collection.insert(collectionData)
+
+   f
+  }
+
   def getListCollection(collectionName : String)(implicit marshaller: Marshaller[Customer]): Route = ctx =>{
     val collection :BSONCollection = dataBase(collectionName)
 
@@ -76,6 +104,8 @@ object MongoPersistence{
     }
 
   }
+
+
 
   def getCustomerCollection(collectionName : String,firstName : String )(implicit marshaller: Marshaller[Customer]): Route = ctx =>{
     val collection :BSONCollection = dataBase(collectionName)

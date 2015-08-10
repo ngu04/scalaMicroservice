@@ -1,10 +1,15 @@
 package model
 
-import reactivemongo.bson.{BSONDocumentReader, BSONDocument, BSONDocumentWriter}
-import spray.json.{DefaultJsonProtocol, JsValue, RootJsonFormat,_}
+import org.json4s.{DefaultFormats, Formats}
+import reactivemongo.bson.{BSONDocument, BSONDocumentReader, BSONDocumentWriter}
+import spray.httpx.Json4sSupport
 
 
 case class Customer (val firstName : String, val lastName: String)
+
+object Json4sCustomerProtocol extends Json4sSupport {
+  implicit def json4sFormats: Formats = DefaultFormats
+}
 
 object Customer {
 
