@@ -49,7 +49,7 @@ object MongoPersistence{
 
   import scala.concurrent.ExecutionContext.Implicits.global
 
-  import scala.concurrent.ExecutionContext
+  //import scala.concurrent.ExecutionContext
 
   val driver = new MongoDriver
   val connection = driver.connection(List("localhost"))
@@ -57,11 +57,11 @@ object MongoPersistence{
   // Gets a reference to the database "plugin"
   val dataBase = connection("plugin")
 
-  def getListWithoutRoute(collectionName : String): Future[List[BSONDocument]] = {
+  def getListWithoutRoute(collectionName : String): Future[List[Customer]] = {
     val collection :BSONCollection = dataBase(collectionName)
 
     val query = BSONDocument()
-    val f = collection.find(query).cursor().collect[List]()
+    val f = collection.find(query).cursor[Customer]().collect[List]()
 
     f
   }

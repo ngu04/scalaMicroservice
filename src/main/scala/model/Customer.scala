@@ -7,9 +7,6 @@ import spray.httpx.Json4sSupport
 
 case class Customer (val firstName : String, val lastName: String)
 
-object Json4sCustomerProtocol extends Json4sSupport {
-  implicit def json4sFormats: Formats = DefaultFormats
-}
 
 object Customer {
 
