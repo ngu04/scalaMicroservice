@@ -13,6 +13,11 @@ http://localhost:9092/customer
 
 http://localhost:8080/person
 
+3. Using "akka-http" for rest-HTTP routing 
+
+http://localhost:8080/customer
+
+
 Both application uses reactive mongo as framework to store json in mongoDB
 
 MongoDB is default configured to run only locally with "plugin" DB
